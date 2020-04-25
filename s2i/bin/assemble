@@ -1,0 +1,11 @@
+#!/bin/bash
+
+DEPLOY_DIR=/deploy
+
+  mkdir -p $DEPLOY_DIR
+  
+  echo "Copying config files from project..."
+
+  
+
+exit 0
