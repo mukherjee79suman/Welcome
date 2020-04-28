@@ -3,7 +3,7 @@ echo "Running builder image Assembly command..."
 
 DELIMITER="/"
 HYPEN="-"
-BASE_ARTIFACTORY_URL="http://127.0.0.1:8081/artifactory"
+BASE_ARTIFACTORY_URL="http://192.168.56.1:8081/artifactory"
 EXTN=".jar"
 
 if [[ "$JAR_VERSION" == *SNAPSHOT ]]
