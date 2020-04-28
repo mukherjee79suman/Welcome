@@ -1,10 +1,6 @@
 #!/bin/bash
 echo "Running builder image Assembly command..."
-sudo su -
-DEPLOY_DIR=/deploy
-whoami
-mkdir -p $DEPLOY_DIR
-  
+
 DELIMITER="/"
 HYPEN="-"
 BASE_ARTIFACTORY_URL="http://127.0.0.1:8081/artifactory"
@@ -23,7 +19,7 @@ else
 fi
 
 echo "Fetching the jar from : $JAR_URL"
-rm $DEPLOY_DIR/$ARTIFACT_ID.jar
+rm ./$ARTIFACT_ID.jar
 curl -Lk -u admin:password12
-$JAR_URL -o $DEPLOY_DIR/$ARTIFACT_ID.jar
+$JAR_URL -o ./$ARTIFACT_ID.jar
 echo "....        Done"
