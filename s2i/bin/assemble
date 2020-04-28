@@ -1,11 +1,29 @@
 #!/bin/bash
+echo "Running builder image Assembly command..."
 
 DEPLOY_DIR=/deploy
 
-  mkdir -p $DEPLOY_DIR
+mkdir -p $DEPLOY_DIR
   
-  echo "Copying config files from project..."
+DELIMITER="/"
+HYPEN="-"
+BASE_ARTIFACTORY_URL="http://127.0.0.1:8081/artifactory"
+EXTN=".jar"
 
-  
+if[[ 	"$JAR_VERSION" == *SNAPSHOT	]]
+then
+	REPO="libs-snapshot"
+	BASE_DIR_URL="$BASE_ARTIFACTORY_URL$REPO$DELIMITER$GROUP_ID$ARTIFACT_ID$DELIMITER$JAR_VERSION$DELIMITER"
+	JAR_NAME=$(curl -s -k -u admin:password12 $BASE_DIR_URL | grep jar | awk -F">" '{print $2}' |awk -F"<" '{print $1}' | grep ".*\.jar$"|sort -nk1 -r |head -n1)
+	echo "JAR NAME : $JAR_NAME"
+	JAR_URL="$BASE_DIR_URL$JAR_NAME"
+else
+	REPO="libs-release"
+	JAR_URL="$BASE_ARTIFACTORY_URL$REPO$DELIMITER$GROUP_ID$ARTIFACT_ID$DELIMITER$JAR_VERSION$DELIMITER$ARTIFACT_ID$HYPEN$JAR_VERSION$EXTN"
+fi
 
-exit 0
+echo "Fetching the jar from : $JAR_URL"
+rm $DEPLOY_DIR/$ARTIFACT_ID.jar
+curl -Lk -u admin:password12
+$JAR_URL -o $DEPLOY_DIR/$ARTIFACT_ID.jar
+echo "....        Done"
