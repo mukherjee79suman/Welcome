@@ -21,4 +21,5 @@ fi
 echo "Fetching the jar from : $JAR_URL"
 rm ./$ARTIFACT_ID.jar
 curl -Lk -u admin:password12 $JAR_URL -o ./$ARTIFACT_ID.jar
+ls -la
 echo "....        Done"
