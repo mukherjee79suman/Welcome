@@ -8,4 +8,4 @@
 #
 
 DEPLOY_DIR="/deploy" 
-java $JVM_ARGS -Dsecrets=/secrets -jar /deploy/$ARTIFACT_ID.jar
+java $JVM_ARGS -Dsecrets=/secrets -jar ./$ARTIFACT_ID.jar
