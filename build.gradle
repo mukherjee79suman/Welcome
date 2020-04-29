@@ -19,7 +19,7 @@ plugins {
 }
 
 group 'com.suman.app'
-version "${currentVersion}"
+version "${version}"
 
 sourceCompatibility = 1.8
 
@@ -41,7 +41,7 @@ publishing {
         mavenJava(MavenPublication) {
             groupId "${group}"
             artifactId 'welcome'
-            version "${currentVersion}"
+            version "${version}"
             from components.java
         }
     }
